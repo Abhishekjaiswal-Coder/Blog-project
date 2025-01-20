@@ -4,48 +4,152 @@ window.addEventListener("scroll", () => {
 });
 
 $(document).ready(function () {
-    $(".filter-item").click(function () {
-        const value = $(this).attr("data-filter");
+  // Filter functionality
+  $(".filter-item").click(function () {
+      const value = $(this).attr("data-filter");
 
-        // Filter the posts based on the selected value
-        if (value === "all") {
-            $(".post-box").fadeIn(1000);  
-            $(".note-taking-box").fadeOut(500); 
-            $(".Textedit-box").fadeOut(500); 
-        } else if (value === "note-taking-box") {
-            $(".post-box").fadeOut(500);  
-            $(".note-taking-box").fadeIn(1000);  
-            $(".Textedit-box").fadeOut(500); 
-        } else if (value === "Textedit-box") {
-            $(".post-box").fadeOut(500);  
-            $(".note-taking-box").fadeOut(500); 
-            $(".Textedit-box").fadeIn(1000); 
-        } else {
-            $(".post-box").fadeOut(500);  
-            $(".post-box." + value).fadeIn(1000);  
-            $(".note-taking-box").fadeOut(500); 
-            $(".Textedit-box").fadeOut(500); 
-        }
+      // Filter the posts based on the selected value
+      if (value === "all") {
+          $(".post-box").fadeIn(1000);
+          $(".note-taking-box").fadeOut(500);
+          $(".Textedit-box").fadeOut(500);
+      } else if (value === "note-taking-box") {
+          $(".post-box").fadeOut(500);
+          $(".note-taking-box").fadeIn(1000);
+          $(".Textedit-box").fadeOut(500);
+      } else if (value === "Textedit-box") {
+          $(".post-box").fadeOut(500);
+          $(".note-taking-box").fadeOut(500);
+          $(".Textedit-box").fadeIn(1000);
+      } else {
+          $(".post-box").fadeOut(500);
+          $(".post-box." + value).fadeIn(1000);
+          $(".note-taking-box").fadeOut(500);
+          $(".Textedit-box").fadeOut(500);
+      }
 
-        // Highlight the selected filter
-        $(this).addClass("active-filter").siblings().removeClass("active-filter");
+    
+      $(this).addClass("active-filter").siblings().removeClass("active-filter");
 
-        // Show the calendar if 'Calendar' filter is selected, hide otherwise
-        if (value === "Calendar") {
-            $("#calendarContainer").fadeIn(1000);  
-        } else {
-            $("#calendarContainer").fadeOut(500);  
-        }
+      
+      if (value === "Calendar") {
+          $("#calendarContainer").fadeIn(1000);
+      } else {
+          $("#calendarContainer").fadeOut(500);
+      }
 
-        // Show the Goal Tracker if 'GoalTracker' filter is selected, hide otherwise
-        if (value === "GoalTracker") {
-            $(".goal-tracker-box").fadeIn(1000);
-        } else {
-            $(".goal-tracker-box").fadeOut(500);
-        }
-    });
+      
+      if (value === "GoalTracker") {
+          $(".goal-tracker-box").fadeIn(1000);
+      } else {
+          $(".goal-tracker-box").fadeOut(500);
+      }
+  });
+
+ 
+  $("#addPostBtn").click(function (e) {
+      e.stopPropagation(); 
+      $("#addPostForm").fadeIn(1000); 
+  });
+
+ 
+  $("#addPostForm").click(function (e) {
+      e.stopPropagation(); 
+  });
+
+  
+  $("#cancelPostBtn").click(function () {
+      $("#addPostForm").fadeOut(500); 
+  });
+
+  
+  $(document).click(function (e) {
+      if (!$(e.target).closest("#addPostForm, #addPostBtn").length) {
+          $("#addPostForm").fadeOut(500); 
+      }
+  });
+
+ 
+  $("#postForm").submit(function (e) {
+      e.preventDefault();
+
+      
+      const category = $("#postCategory").val();
+      const title = $("#postTitle").val();
+      const date = $("#postDate").val();
+      const description = $("#postDescription").val();
+      const profileName = $("#profileName").val();
+      const postImageFile = $("#postImage")[0].files[0];
+      const profileImageFile = $("#profileImage")[0].files[0]; // Get the profile image file
+      const postImageReader = new FileReader();
+      const profileImageReader = new FileReader();
+
+      
+      postImageReader.onload = function (event) {
+          const postImgSrc = event.target.result;
+
+    
+          profileImageReader.onload = function (event) {
+              const profileImgSrc = event.target.result;
+
+              
+              const newPost = `
+                  <div class="post-box ${category.toLowerCase()}">
+                      <img src="${postImgSrc}" alt="" class="post-img">
+                      <h2 class="category">${category}</h2>
+                      <a href="#" class="post-title">${title}</a>
+                      <span class="post-date">${date}</span>
+                      <p class="post-description">${description}</p>
+                      <div class="profile">
+                          <img src="${profileImgSrc}" alt="" class="profile-img"> <!-- Display profile image -->
+                          <span class="profile-name">${profileName}</span>
+                      </div>
+                  </div>
+              `;
+
+             
+              $(".post.container").append(newPost);
+
+              
+              $("#postForm")[0].reset();
+              $("#addPostForm").fadeOut(1000);
+          };
+
+          if (profileImageFile) {
+              profileImageReader.readAsDataURL(profileImageFile); // Read profile image
+          } else {
+              
+              profileImageReader.onload = function () {
+                  const defaultProfileImg = "blogimages/default-profile.png";
+                  const newPost = `
+                      <div class="post-box ${category.toLowerCase()}">
+                          <img src="${postImgSrc}" alt="" class="post-img">
+                          <h2 class="category">${category}</h2>
+                          <a href="#" class="post-title">${title}</a>
+                          <span class="post-date">${date}</span>
+                          <p class="post-description">${description}</p>
+                          <div class="profile">
+                              <img src="${defaultProfileImg}" alt="" class="profile-img"> <!-- Default profile image -->
+                              <span class="profile-name">${profileName}</span>
+                          </div>
+                      </div>
+                  `;
+
+                  
+                  $(".post.container").append(newPost);
+
+                 
+                  $("#postForm")[0].reset();
+                  $("#addPostForm").fadeOut(1000);
+              };
+          }
+      };
+
+      if (postImageFile) {
+          postImageReader.readAsDataURL(postImageFile); // Read post image
+      }
+  });
 });
-
 
 // Calendar  js code here
 let newDateFunction = new Date();

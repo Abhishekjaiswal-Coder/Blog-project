@@ -37,7 +37,7 @@
 
     <div class="post-filter container">
         <span class="filter-item active-filter" data-filter="all">All</span>
-        <span class="filter-item" data-filter="Blogpost">Blogpost</span>
+        <span class="filter-item" data-filter="Blogpost">Travel-places</span>
         <span class="filter-item" data-filter="tech">Tech</span>
         <span class="filter-item" data-filter="food">Food</span>
         <span class="filter-item" data-filter="news">News</span>
@@ -45,6 +45,7 @@
         <span class="filter-item" data-filter="GoalTracker">GoalTracker</span>
         <span class="filter-item" data-filter="note-taking-box">Note taking</span>
         <span class="filter-item" data-filter="Textedit-box">Text editor</span>
+        <span class="filter-item" id="addPostBtn">Add Post</span>
     </div>
     
     
@@ -201,7 +202,7 @@
         <!-- Post 13 -->
         <div class="post-box Blogpost">
             <img src="blogimages/taj mahal.jpg" alt="" class="post-img">
-            <h2 class="category">Blogpost</h2>
+            <h2 class="category">Travel-places</h2>
             <a href="#" class="post-title">Taj Mahal: A Marvel of Mughal Architecture</a>
             <span class="post-date">14 January 2025</span>
             <p class="post-description">The Taj Mahal, a UNESCO World Heritage Site in Agra, India, stands as an iconic symbol of love and architectural brilliance, built by Emperor Shah Jahan for his wife Mumtaz Mahal.</p>
@@ -213,7 +214,7 @@
         <!-- Post 14 -->
         <div class="post-box Blogpost">
             <img src="blogimages/tourist-places-in-america1.jpg" alt="" class="post-img">
-            <h2 class="category">Blogpost</h2>
+            <h2 class="category">Travel-places</h2>
             <a href="#" class="post-title">Exploring America's Iconic Tourist Destinations</a>
             <span class="post-date">14 January 2025</span>
             <p class="post-description">The United States offers diverse attractions like the Statue of Liberty in New York, the Grand Canyon in Arizona, and Disneyland in California, making it a top destination for travelers worldwide.</p>
@@ -225,7 +226,7 @@
         <!-- Post 15 -->
         <div class="post-box Blogpost">
             <img src="blogimages/World Beautiful lands.jpg" alt="" class="post-img">
-            <h2 class="category">Blogpost</h2>
+            <h2 class="category">Travel-places</h2>
             <a href="#" class="post-title">The World's Beautiful lands</a>
             <span class="post-date">14 January 2025</span>
             <p class="post-description">The world's most beautiful and lesser-known lands, filled with breathtaking landscapes and serene beauty, waiting to be explored.</p>
@@ -277,7 +278,7 @@
         <!-- Post 19 -->
         <div class="post-box Blogpost">
             <img src="blogimages/World Beautiful place.jpg" alt="" class="post-img">
-            <h2 class="category">Blogpost</h2>
+            <h2 class="category">Travel-places</h2>
             <a href="#" class="post-title">The Most Beautiful Places on Earth</a>
             <span class="post-date">14 January 2025</span>
             <p class="post-description">Explore the breathtakingly beautiful spots on Earth, where nature's wonders come together in perfect harmony.</p>
@@ -289,7 +290,7 @@
         <!-- Post 20 -->
         <div class="post-box Blogpost">
             <img src="blogimages/starspace.jpg" alt="" class="post-img">
-            <h2 class="category">Blogpost</h2>
+            <h2 class="category">Travel-places</h2>
             <a href="#" class="post-title">The Mysteries of Starry Skies</a>
             <span class="post-date">14 January 2025</span>
             <p class="post-description">A glimpse into the awe-inspiring beauty of the night sky, where countless stars shine, each holding its own story.</p>
@@ -301,7 +302,7 @@
         <!-- Post 21 -->
         <div class="post-box Blogpost">
             <img src="blogimages/Kashmir.jpg" alt="" class="post-img">
-            <h2 class="category">Blogpost</h2>
+            <h2 class="category">Travel-places</h2>
             <a href="#" class="post-title">The Beauty of Kashmir</a>
             <span class="post-date">14 January 2025</span>
             <p class="post-description">Kashmir, with its lush valleys, snow-capped mountains, and peaceful lakes, is a true paradise on Earth.</p>
@@ -310,6 +311,35 @@
                 <span class="profile-name">Coder army</span>
             </div>
         </div>
+    </div>
+
+    <button id="addPostBtn"></button>
+    <!-- Add Post Form -->
+    <div id="addPostForm" style="display: none;">
+        <form id="postForm">
+            <select id="postCategory" required>
+                <option value="" disabled selected>Choose a category</option>
+                <option value="Travel-places">Travel-places</option>
+                <option value="Tech">Tech</option>
+                <option value="Food">Food</option>
+                <option value="News">News</option>
+            </select>
+            <input type="text" id="postTitle" placeholder="Title" required>
+            <input type="date" id="postDate" required>
+            <textarea id="postDescription" placeholder="Description" required></textarea>
+            <input type="text" id="profileName" placeholder="Profile Name" required>
+    
+            <!-- Post Image Input with Label -->
+            <label for="postImage">Choose Post Image:</label>
+            <input type="file" id="postImage" accept="image/*" required><br>
+    
+            <!-- Profile Image Input with Label -->
+            <label for="profileImage">Choose Profile Image:</label>
+            <input type="file" id="profileImage" accept="image/*" required><br>
+    
+            <button type="submit">Add Post</button>
+            <button type="button" id="cancelPostBtn">Cancel</button>
+        </form>
     </div>
 
     <!-- Calendar Section -->

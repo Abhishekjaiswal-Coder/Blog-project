@@ -279,6 +279,30 @@ header.shadow .logo{
     margin-top: 22px;
 }
 
+#addPostForm {
+    background: var(--bg-color);
+    padding: 20px;
+    box-shadow: 0 4px 14px hsl(35deg 25% 15% / 10%);
+    border-radius: 0.5rem;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+#addPostForm input, #addPostForm textarea, #addPostForm button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid var(--second-color);
+    border-radius: 0.5rem;
+}
+
+#addPostForm button {
+    background: var(--second-color);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 footer{
     position: relative;
     width: 100%;
